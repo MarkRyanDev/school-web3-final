@@ -2,17 +2,16 @@ console.log('Loading Server');
 const WEB = __dirname.replace('server', 'dist');
 
 var express = require('express'); //have to have loaded this module onto your machine first
+var logger = require('morgan');
 
 var routes = require('./api.js');
 
 var app = express();
 
 
-
+app.use(logger('dev'));
 
 app.use('/api', routes);
-
-
 
 app.use(express.static(WEB)); //this turns it into a server like Apache server that we were using before //secret sauce //will feed your html your images 
 
