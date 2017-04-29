@@ -9,11 +9,5 @@ import 'rxjs/add/operator/toPromise';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    constructor(private http: Http) { 
-      this.http.get('/api/employees')
-               .toPromise()
-               .then(response => this.employees = response.json())
-               .catch(function(err){console.log(err);});
-    }
-    employees = []
+
 }
