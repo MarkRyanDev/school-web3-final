@@ -29,4 +29,12 @@ router.post('/tasks', function(req, res) {
         res.send(result.insertedId);
     });
 });
+
+router.patch('/tasks/:taskid', function(req, res) {
+  console.log(req.body)
+  dao.updateTask(req.params.taskid, req.body, function(err, result){
+    if(err) throw err;
+    res.sendStatus(200);
+  })
+})
 module.exports = router;

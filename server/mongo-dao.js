@@ -32,7 +32,10 @@ exports.deleteTask = function(taskid, callback){
 
         var collection = db.collection('tasks');
 
-        collection.deleteOne({_id:o_id(taskid)}, callback);
+        collection.deleteOne({_id:o_id(taskid)}, function(err, result){
+          db.close();
+          callback(err, result);
+        });
     });
 }
 
@@ -41,8 +44,24 @@ exports.addTask = function(task, callback){
         if(err) callback(err);
 
         var collection = db.collection('tasks');
-        collection.insertOne(task, callback);
+        collection.insertOne(task, function(err, result){
+          db.close();
+          callback(err, result);
+        });
     })
+}
+
+exports.updateTask = function(taskid, done, callback) {
+    mongo.connect(url, function(err, db) {
+      if(err) callback(err);
+
+      var collection = db.collection('tasks');
+      collection.updateOne( {_id:o_id(taskid)}, {$set:{done:done.done}}, function(err, result){
+        db.close();
+        callback(err, result);
+      });
+    })
+
 }
 
 module.exports = exports;
