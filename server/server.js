@@ -3,6 +3,7 @@ const WEB = __dirname.replace('server', 'dist');
 
 var express = require('express'); //have to have loaded this module onto your machine first
 var logger = require('morgan');
+var bodyParser = require('body-parser'); //NEW
 
 var routes = require('./api.js');
 
@@ -10,6 +11,11 @@ var app = express();
 
 
 app.use(logger('dev'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+})); // for parsing application
 
 app.use('/api', routes);
 

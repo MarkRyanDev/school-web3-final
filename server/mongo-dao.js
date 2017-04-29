@@ -36,4 +36,13 @@ exports.deleteTask = function(taskid, callback){
     });
 }
 
+exports.addTask = function(task, callback){
+    mongo.connect(url, function(err, db){
+        if(err) callback(err);
+
+        var collection = db.collection('tasks');
+        collection.insertOne(task, callback);
+    })
+}
+
 module.exports = exports;

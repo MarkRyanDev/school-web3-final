@@ -9,15 +9,23 @@ import { Http } from '@angular/http';
 export class EmployeeManageComponent {    
   constructor(private http: Http) { }
  
-  @Input() name
-  @Input() tasks 
+  @Input() emp
   remove(taskToRemove){
     this.http.delete('/api/tasks/' + taskToRemove._id)
                .toPromise()
-               .then(this.tasks = this.tasks.filter(task => task != taskToRemove))
+               .then(()=>this.emp.tasks = this.emp.tasks.filter(task => task != taskToRemove))
                .catch(function(err){console.log(err);});
   }
   add(taskToAdd){
-    this.tasks = [...this.tasks, {text:taskToAdd, done:false}];
+    this.http.post('/api/tasks', {text:taskToAdd, done:false, empid:this.emp._id})
+               .toPromise()
+               .then(response=>{
+                 this.emp.tasks = 
+                  [
+                    ...this.emp.tasks, 
+                    {text:taskToAdd, done:false, empid:this.emp._id, _id:response.json()}
+                  ];
+                })
+               .catch(function(err){console.log(err);});
   }
 }

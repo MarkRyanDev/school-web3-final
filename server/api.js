@@ -23,8 +23,10 @@ router.delete('/tasks/:taskid', function(req, res) {
     });
 });
 
-router.post('/tasks/:empid', function(req, res) {
-    console.log("got get for " + req.params.empid);
-    res.sendStatus(200);
+router.post('/tasks', function(req, res) {
+    dao.addTask(req.body, function(err, result){
+        if(err) throw err;
+        res.send(result.insertedId);
+    });
 });
 module.exports = router;

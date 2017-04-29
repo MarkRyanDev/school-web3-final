@@ -2,5 +2,5 @@
   title
 </h1>
 <div>
-  <app-employee-manage *ngFor="let emp of employees" [name]="emp.name" [tasks]="emp.tasks">loading Employee...</app-employee-manage>
+  <app-employee-manage *ngFor="let emp of employees" [emp]=emp>loading Employee...</app-employee-manage>
 </div>
