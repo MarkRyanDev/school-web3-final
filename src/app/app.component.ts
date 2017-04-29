@@ -13,7 +13,7 @@ export class AppComponent {
       this.http.get('/api/employees')
                .toPromise()
                .then(response => this.employees = response.json())
-               .catch(function(){});
+               .catch(function(err){console.log(err);});
     }
     employees = []
 }

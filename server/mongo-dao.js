@@ -26,16 +26,13 @@ exports.getAll = function(callback){
     });
 };
 
-exports.deleteTask = function(empid, taskid, callback){
+exports.deleteTask = function(taskid, callback){
     mongo.connect(url, function(err, db){
         if(err)callback(err);
 
-        var collection = db.collection('employees');
+        var collection = db.collection('tasks');
 
-        collection.find({}).toArray(function(err, docs){
-            db.close();
-            callback(err, docs);
-        });
+        collection.deleteOne({_id:o_id(taskid)}, callback);
     });
 }
 
