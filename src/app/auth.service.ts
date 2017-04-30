@@ -19,12 +19,14 @@ export class AuthService {
             this.empInfo = res.json();
             this.router.navigate([res.json().role])
           }
+          this.checkingToken = false;
         })
         .catch(function(err){
           console.log(err);
         })
+    } else {
+        this.checkingToken = false;
     }
-    this.checkingToken = false;
   }
   isLoggedIn: boolean = false;
   checkingToken = true;
