@@ -22,18 +22,21 @@ app.use(bodyParser.urlencoded({
 })); // for parsing application
 app.use(flash());
 app.use(expressSession({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+
+
+// app.use(function (req, res, next) {
+//   console.log(`in my middleware, req.body:${JSON.stringify(req.body)}`);
+//   next()
+// })
 app.use(passport.initialize());
 app.use(passport.session());
 
 
 app.use('/api', routes);
 
-// app.use(function (req, res, next) {
-//   console.log(`in my middleware, req.user:${req.user}`);
-//   next()
-// })
 
-app.use(express.static(WEB)); //this turns it into a server like Apache server that we were using before //secret sauce //will feed your html your images 
+
+app.use(express.static(WEB)); //this turns it into a server like Apache server that we were using before //secret sauce //will feed your html your images
 
 app.get('*', function(req, res) {
     res.status(404).sendFile(WEB + '/index.html');
