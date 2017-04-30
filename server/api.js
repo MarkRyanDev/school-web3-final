@@ -22,11 +22,11 @@ passport.use(new LocalStrategy(
 ));
 
 router.post('/login',
-  passport.authenticate('local', { failureRedirect: '/login'}),
+  passport.authenticate('local'),
                                 //    failureFlash: true })
     function(req, res) {
         // console.log(`in passport.authenticateCALLBACK, req.user: ${JSON.stringify(req.user)}`);
-        res.redirect('/');
+        res.send(req.user);
 });
 
 passport.serializeUser(function(user, cb) {

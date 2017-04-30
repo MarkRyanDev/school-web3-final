@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
+import { AuthService } from '../auth.service'
+
 import 'rxjs/add/operator/toPromise';
 
 @Component({
@@ -10,19 +12,19 @@ import 'rxjs/add/operator/toPromise';
 })
 export class EmployeeViewComponent {
 
-  constructor(private http: Http) {
+  constructor(private http: Http, public auth: AuthService) {
     this.http.get('/api/employees')
       .toPromise()
       .then(response => {
         this.employees = response.json();
-        this.emp = this.employees.find(e=>e._id===this.empid);
-        console.log(this.employees);
+        this.emp = this.employees.find(e => e._id === this.auth.empInfo._id);
+        // console.log(this.employees);
       })
       .catch(function(err){console.log(err);});
   }
-  employees = []
-  emp = {name:"", tasks:[]}
-  empid="590519c4b3696d3eea20f258";
-  notMeFilter = (e)=> e._id !== this.empid;
+  employees = [];
+  emp;
+  
+  notMeFilter = (e)=> e._id !== this.auth.empInfo._id;
 
 }

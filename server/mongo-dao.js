@@ -69,7 +69,7 @@ exports.findUser = function(username, callback){
 
         var collection = db.collection('employees');
 
-        collection.findOne({username:username},{fields:{password:1, username:1}}, function(err, result){
+        collection.findOne({username:username}, function(err, result){
             db.close();
             callback(err, result);
         });

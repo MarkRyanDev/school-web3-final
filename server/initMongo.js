@@ -10,17 +10,20 @@ mongo.connect(url, function(err, db){
       {
         name: "Sally Salamander",
         username: "ssmander",
-        password: "lizardcity"
+        password: "lizardcity",
+        role: "employee"
       },
       {
         name: "John Johnson",
         username: "jjohnson",
-        password: "123456"
+        password: "123456",
+        role: "employee"
       },
       {
         name: "Catbert",
         username: "yournightmare",
-        password: "suffering"
+        password: "suffering",
+        role: "employer"
       }
     ], function(err, result){
       // console.log(result);
