@@ -24,8 +24,10 @@ export class AuthService {
           console.log(err);
         })
     }
+    this.checkingToken = false;
   }
   isLoggedIn: boolean = false;
+  checkingToken = true;
   empInfo;
 
   // store the URL so we can redirect after logging in
