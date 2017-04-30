@@ -22,7 +22,7 @@ export class EmployeeViewComponent {
   }
   employees = []
   emp = {name:"", tasks:[]}
-  empid="5905190d7533811ad480998e";
+  empid="590519c4b3696d3eea20f258";
   notMeFilter = (e)=> e._id !== this.empid;
 
 }
