@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
         <p>{{message}}</p>
         <div>
         <div *ngIf="!authService.isLoggedIn">
-            <span>Username:<input #user type="text">Password:<input #pass type="text"></span>
+            <span>Username:<input #user type="text">Password:<input #pass type="password"></span>
             <button (click)="login(user.value, pass.value)" >Login</button>
         </div>
         <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
