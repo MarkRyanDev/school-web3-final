@@ -2,5 +2,6 @@
   title
 </h1>
 <div>
+  <div *ngIf="allDone()">All employees done</div>
   <app-employee-manage *ngFor="let emp of employees" [emp]=emp>loading Employee...</app-employee-manage>
 </div>

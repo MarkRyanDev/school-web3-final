@@ -16,4 +16,7 @@ export class EmployerViewComponent {
       .catch(function(err){console.log(err);});
   }
   employees = []
+  allDone() {
+    return this.employees.every(employee=>employee.tasks.every(task=>task.done));
+  }
 }
