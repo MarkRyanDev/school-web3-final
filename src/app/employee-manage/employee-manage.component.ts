@@ -6,9 +6,9 @@ import { Http } from '@angular/http';
   templateUrl: './employee-manage.component.html',
   styleUrls: ['./employee-manage.component.css']
 })
-export class EmployeeManageComponent {    
+export class EmployeeManageComponent {
   constructor(private http: Http) { }
- 
+
   @Input() emp
   remove(taskToRemove){
     this.http.delete('/api/tasks/' + taskToRemove._id)
@@ -17,15 +17,19 @@ export class EmployeeManageComponent {
                .catch(function(err){console.log(err);});
   }
   add(taskToAdd){
-    this.http.post('/api/tasks', {text:taskToAdd, done:false, empid:this.emp._id})
+    let wasRecurring  = this.newItemIsRecurring;
+    this.newItemIsRecurring = false;
+    this.http.post('/api/tasks', {text:taskToAdd, done:false, empid:this.emp._id, recurring:wasRecurring})
                .toPromise()
                .then(response=>{
-                 this.emp.tasks = 
+                 this.emp.tasks =
                   [
-                    ...this.emp.tasks, 
-                    {text:taskToAdd, done:false, empid:this.emp._id, _id:response.json()}
+                    ...this.emp.tasks,
+                    {text:taskToAdd, done:false, empid:this.emp._id, _id:response.json(), recurring:wasRecurring}
                   ];
                 })
                .catch(function(err){console.log(err);});
   }
+
+  newItemIsRecurring = false;
 }

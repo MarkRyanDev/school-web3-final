@@ -93,16 +93,20 @@ schedule.scheduleJob('0 0 0 * * 1', function(){
             mailOptions.text += emp.name;
             mailOptions.text += '\n';
             emp.tasks.forEach(function(task){
-                mailOptions.text += `\t${task.done ? "\u2713" : "x"} ${task.text}\n`;
+                mailOptions.text += `\t${task.recurring ? "\u27f2" : "    "} ${task.done ? "\u2713" : "x  "} ${task.text}\n`;
             })
             mailOptions.text += '\n\n';
         }, this);
-        console.log(JSON.stringify(mailOptions));
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 return console.log(error);
             }
             console.log('Message %s sent: %s', info.messageId, info.response);
         });
+        dao.weeklyReset(function(err, result) {
+          if(err) {
+            console.log(err);
+          }
+        })
     });
 });

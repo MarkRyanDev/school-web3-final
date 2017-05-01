@@ -18,7 +18,7 @@ exports.getAll = function(callback){
             var taskCollection = db.collection('tasks');
             taskCollection.find({}).toArray(function(err, tasks){
                 var groupedTasks = _.groupBy(tasks, 'empid');
-                emps.forEach(emp => emp.tasks = groupedTasks[emp._id]);
+                emps.forEach(emp => emp.tasks = groupedTasks[emp._id] || []);
                 db.close();
                 callback(err, emps);
             });
@@ -74,6 +74,20 @@ exports.findUser = function(username, callback){
             callback(err, result);
         });
     });
+}
+
+exports.weeklyReset = function(callback) {
+  mongo.connect(url, function(err, db) {
+    if(err) callback(err);
+
+    var collection = db.collection('tasks');
+
+    collection.deleteMany({recurring:false}, function(err, result) {
+      db.close();
+      callback(err, result);
+    })
+  })
+
 }
 
 module.exports = exports;
