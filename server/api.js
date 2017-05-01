@@ -63,8 +63,8 @@ passport.deserializeUser(function(username, cb) {
 router.get('/employees', function(req, res){
     dao.getAll(function(err, emps){
         if (err) throw err;
-        res.send(emps);
         // console.log(emps);
+        res.send(emps);
         // res.sendStatus(200);
     });
 })
