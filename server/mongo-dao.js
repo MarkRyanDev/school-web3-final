@@ -80,12 +80,23 @@ exports.weeklyReset = function(callback) {
   mongo.connect(url, function(err, db) {
     if(err) callback(err);
 
-    var collection = db.collection('tasks');
+    var taskCollection = db.collection('tasks');
 
-    collection.deleteMany({recurring:false}, function(err, result) {
-      db.close();
-      callback(err, result);
+    taskCollection.find({}).toArray(function(err, tasks){
+      var empCollection = db.collection("employees");
+      empCollection.find({}).toArray(function(err, emps) {
+        var historyCollection = db.collection("history");
+        historyCollection.insertOne({tasks:tasks, employees:emps}, function(err, result){
+
+          taskCollection.deleteMany({recurring:false}, function(err, result) {
+            db.close();
+            callback(err, result);
+          })
+        })
+      })
     })
+
+
   })
 
 }

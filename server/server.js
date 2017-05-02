@@ -84,7 +84,7 @@ let mailOptions = {
     text: '.....', // plain text body
 };
                     //0:0:0 any day, any month, on Mondays
-schedule.scheduleJob('0 0 0 * * 1', function(){
+// schedule.scheduleJob('0 0 0 * * 1', function(){
     // send mail with defined transport object
     dao.getAll(function(err, emps){
         if (err) console.log(err);
@@ -108,5 +108,5 @@ schedule.scheduleJob('0 0 0 * * 1', function(){
             console.log(err);
           }
         })
-    });
+    // });
 });
