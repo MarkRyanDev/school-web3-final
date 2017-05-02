@@ -14,9 +14,11 @@ The graphic for done is a gold star and for not a gray faded star or a hollow st
 
 configuration via config file
 
-new add functionility - multiple employees at once
-add recurring field to each task
-    recurring tasks will not be removed at end of week, will set done to false
+-new add functionility - multiple employees at once
+-add recurring field to each task
+    -recurring tasks will not be removed at end of week, will set done to false
+
+employer complete own todos
 
 create new account functionality
 dont send passwords around
