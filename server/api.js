@@ -34,7 +34,7 @@ passport.use(new LocalStrategy(
 
 router.post('/login',
   passport.authenticate('local'),
-                                //    failureFlash: true })
+  // {failureFlash:true},
     function(req, res) {
         // console.log(`in passport.authenticateCALLBACK, req.user: ${JSON.stringify(req.user)}`);
       req.user.token = jwt.sign(req.user, "secret");
